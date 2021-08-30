@@ -63,7 +63,7 @@ class corrSH(Base_Model):
         log_likelihood = self.dec(s, X.sign())
 
         # Compute the KL term
-        # To fully understand the KL term, please defers to: 
+        # To fully understand the KL term, please defers to: https://j-zin.github.io/files/corrSH_script.pdf
         s_prime, z_k_samples = self.construct_multiple_samples(mu, std, u_pert, self.hparams.sample_m)
         logqs_r = torch.sum(z_k_samples * s_prime - F.softplus(z_k_samples), dim=2)
         constant = torch.log(torch.tensor(self.hparams.sample_m + 0.)).to(self.hparams.device)
